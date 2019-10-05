@@ -1,23 +1,47 @@
 package ru.pikabu;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.*;
+
 public class PikabuTest {
 
-    @Test
-    public void checkSearchBar() {
-        open("https://pikabu.ru/");
-        $(By.cssSelector("div.input_focus")).shouldBe(Condition.visible);
-    }
+  @Test
+  public void userCanSearch() {
+    Configuration.holdBrowserOpen = true;
+    open("https://pikabu.ru/");
+    $(By.cssSelector("form[action='/search']"))
+            .click();
+    $(By.name("q"))
+            .setValue("коты")
+            .pressEnter();
+    $(By.cssSelector("section.section_gray"))
+            .shouldBe(Condition.visible);
+  }
 
-    @Test
-    public void userCanSearchGoole() {
-        open("https://pikabu.ru/");
-        $(By.id("search")).setValue("коты").pressEnter();
-    }
+  @Test
+  public void stories() {
+    Configuration.holdBrowserOpen = true;
+    open("https://pikabu.ru/");
+    $(By.cssSelector("div.stories-feed"))
+            .shouldBe(Condition.visible);
+  }
+
+  @Test
+  public void authorization() {
+    Configuration.holdBrowserOpen = true;
+    open("https://pikabu.ru/");
+    $(By.cssSelector("div.input__box input.input__input[name='username']"))
+            .shouldBe(Condition.visible);
+    $(By.cssSelector("div.input__box input.input__input[name='username']"))
+            .setValue("fynjif18");
+    $(By.cssSelector("div.input__box input.input__input[name='password']"))
+            .setValue("Kjkqsrkzptq01")
+            .pressEnter();
+  }
+
 }
