@@ -40,8 +40,8 @@ public class PikabuTest {
     $(By.cssSelector("div.input__box input.input__input[name='username']"))
             .setValue("fynjif18");
     $(By.cssSelector("div.input__box input.input__input[name='password']"))
-            .setValue("Kjkqsrkzptq01")
-            .pressEnter();
+            .setValue("Kjkqsrkzptq01");
+    $(By.cssSelector("form[id='signin-form'] button.button_success.button_width_100")).click();
   }
 
 }

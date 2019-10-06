@@ -1,7 +1,6 @@
 package ru.pikabu;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.ru.Если;
 import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.То;
@@ -22,14 +21,9 @@ public class MyStepdefs {
     $(By.cssSelector("form[action='/search']")).click();
   }
 
-  @И("ввести в поле поиска {string}")
+  @И("ввести в поле поиска текст {string}")
   public void ввестиВПолеПоиска(String arg0) {
-    $(By.name("q")).setValue(arg0);
-  }
-
-  @И("нажать Enter")
-  public void нажатьEnter(SelenideElement el) {
-    el.pressEnter();
+    $(By.name("q")).setValue(arg0).pressEnter();
   }
 
   @То("настройка поиска отображена")
@@ -45,15 +39,20 @@ public class MyStepdefs {
 
   }
 
-  @И("ввести в поле логин {string}")
+  @И("ввести в поле логин текст {string}")
   public void ввестиВПолеЛогин(String arg0) {
     $(By.cssSelector("div.input__box input.input__input[name='username']"))
             .setValue(arg0);
   }
 
-  @И("ввести в поле пароль {string}")
-  public void ввестиВПолеПароль(String arg0) {
+  @И("ввести в поле пароль текст {string}")
+  public void ввестиВПолеПарольТекст(String arg0) {
     $(By.cssSelector("div.input__box input.input__input[name='password']"))
             .setValue(arg0);
+  }
+
+  @И("нажать на авторизоваться")
+  public void нажатьНаАвторизоваться() {
+    $(By.cssSelector("form[id='signin-form'] button.button_success.button_width_100")).click();
   }
 }
